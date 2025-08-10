@@ -1,24 +1,31 @@
 let amigos = [];
 
 function agregarAmigo() {
-    let nombre = document.getElementById("amigo").value;
+    let campo = document.getElementById("amigo");
+    let nombre = campo.value.trim();
     if (validarNombre(nombre)) {
         amigos.push(nombre);
         actualizarLista();
-        document.getElementById("amigo").value = ""; //Limpiar el campo de entrada
+        campo.value = "";
+        campo.focus();
     } else {
-        alert("Inserta un nombre.");
+        alert("Inserta un nombre válido.");
     }
 }
 
 function validarNombre(nombre) {
-    return nombre.trim() !== "";
+    if (nombre === "") return false;
+    if (amigos.includes(nombre)) {
+        alert("Ese nombre ya fue agregado.");
+        return false;
+    }
+    return true;
 }
 
 function actualizarLista() {
     let lista = document.getElementById("listaAmigos");
-    lista.innerHTML = ""; // Limpiar la lista actual
-    amigos.forEach(function(amigo) {
+    lista.innerHTML = "";
+    amigos.sort().forEach(function(amigo) {
         let li = document.createElement("li");
         li.textContent = amigo;
         lista.appendChild(li);
@@ -28,11 +35,11 @@ function actualizarLista() {
 function sortearAmigo() {
     if (amigos.length === 0) {
         alert("No hay nombres para sortear.");
+        return;
     }
-    else {
-        let indiceAmigo = Math.floor(Math.random() * amigos.length);
-        let amigoSorteado = amigos[indiceAmigo];
-        document.getElementById("resultado").textContent = "Amigo sorteado: " + amigoSorteado;
-    }
+    let indiceAmigo = Math.floor(Math.random() * amigos.length);
+    let amigoSorteado = amigos[indiceAmigo];
+    document.getElementById("resultado").textContent = "Amigo sorteado: " + amigoSorteado;
 }
+
 
