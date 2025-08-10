@@ -1,5 +1,3 @@
-
-
 let amigos = [];
 
 function agregarAmigo() {
@@ -37,3 +35,4 @@ function sortearAmigo() {
         document.getElementById("resultado").textContent = "Amigo sorteado: " + amigoSorteado;
     }
 }
+
